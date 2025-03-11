@@ -6,6 +6,33 @@
 <body style="display: flex; flex-direction: column; ">
     <canvas id="game" width="320" height="200"  style="outline: 1px solid white;"></canvas>
     <script>
+	const dungeon = [
+		"########################################",
+		"#......................................#",
+		"#...............................x......#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"#......................................#",
+		"########################################",
+	]
         const TILE_WIDTH = 8;
         const WIDTH = 40
         const HEIGHT = 25
@@ -16,7 +43,7 @@
         
         const ctx = game.getContext("2d");
         
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "darkgrey";
         ctx.strokeStyle = "blue";
 
         for (x = 0; x < WIDTH; x++) {
@@ -24,6 +51,39 @@
                 ctx.fillRect(x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
             }
         }
-    </script>
+
+	function Block(r, g, b, a) {
+		const imgData = ctx.createImageData(8, 8);
+		for (let i = 0; i < imgData.data.length; i += 4) {
+	  		imgData.data[i+0] = r;
+	 		imgData.data[i+1] = g;
+			imgData.data[i+2] = b;
+	  		imgData.data[i+3] = a;
+		}
+		return imgData;
+
+	}
+
+	const block_white = Block(255,255,255,255)
+	const block_black = Block(0,0,0,255)
+	const block_red = Block(255,0,0,255)
+	ctx.putImageData(block_white, 0, 0);
+	ctx.putImageData(block_black, 0, 8);
+	ctx.putImageData(block_red, 8, 0);
+	
+	const dungeon_height = dungeon.length;
+	for (let i = 0; i < dungeon_height; i++) {
+		const row = dungeon[i]
+		const row_length = row.length
+		for (let j = 0; j < row_length; j++) {
+			const current_char = row.charAt(j)
+			if (current_char === '#') ctx.putImageData(block_red, j*8, i*8)
+			if (current_char === '.') ctx.putImageData(block_black, j*8, i*8)
+			if (current_char === 'x') ctx.putImageData(block_white, j*8, i*8)
+
+		}
+	}
+
+	    </script>
 </body>
 </html>
