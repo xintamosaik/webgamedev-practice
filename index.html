@@ -6,8 +6,24 @@
 <body style="display: flex; flex-direction: column; ">
     <canvas id="game" width="320" height="200"  style="outline: 1px solid white;"></canvas>
     <script>
-     const game=window.game  
+        const TILE_WIDTH = 8;
+        const WIDTH = 40
+        const HEIGHT = 25
 
+        const game = window.game  
+        game.width = TILE_WIDTH * WIDTH
+        game.height = TILE_WIDTH * HEIGHT
+        
+        const ctx = game.getContext("2d");
+        
+        ctx.fillStyle = "red";
+        ctx.strokeStyle = "blue";
+
+        for (x = 0; x < WIDTH; x++) {
+            for (y = 0; y < HEIGHT; y++) {
+                ctx.fillRect(x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+            }
+        }
     </script>
 </body>
 </html>
