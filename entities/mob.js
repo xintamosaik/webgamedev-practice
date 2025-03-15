@@ -3,7 +3,7 @@ import { createPositionComponent } from '../components/position.js';
 import { createVelocityComponent } from '../components/velocity.js';
 import { createAIComponent } from '../components/ai.js';
 
-export function createMob(x, y) {
+export default function addMob(x, y) {
   const id = entities.length;
   const entity = {
     id,

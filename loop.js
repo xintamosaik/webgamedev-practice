@@ -1,6 +1,6 @@
 import { systems } from './core/ecs.js';
 
-export function initGameLoop() {
+export default function initLoop() {
   const TICK_RATE = 60;
   const MS_PER_TICK = 1000 / TICK_RATE;
   let lastTime = performance.now();

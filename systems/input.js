@@ -1,6 +1,6 @@
 import { getEntitiesWith } from '../core/ecs.js';
 
-export const inputSystem = {
+export const Input = {
   update(dt) {
     const entities = getEntitiesWith('input', 'velocity');
     

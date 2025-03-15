@@ -3,7 +3,7 @@ import { createPositionComponent } from '../components/position.js';
 import { createVelocityComponent } from '../components/velocity.js';
 import { createInputComponent } from '../components/input.js';
 
-export function createPlayer(x, y) {
+export default function addPlayer(x, y) {
   const id = entities.length;
   const entity = {
     id,

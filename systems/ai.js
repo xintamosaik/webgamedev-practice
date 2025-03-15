@@ -1,6 +1,6 @@
 import { getEntitiesWith } from '../core/ecs.js';
 
-export const aiSystem = {
+export const Ai = {
   update(dt) {
     const entities = getEntitiesWith('ai', 'velocity');
     

@@ -1,6 +1,6 @@
 import { getEntitiesWith } from '../core/ecs.js';
 
-export const movementSystem = {
+export const Movement = {
   update(dt) {
     const entities = getEntitiesWith('position', 'velocity');
     

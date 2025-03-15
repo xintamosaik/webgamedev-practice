@@ -2,7 +2,7 @@
 export const entities = [];
 export const systems = [];
 
-export function registerSystem(system) {
+export function register(system) {
   systems.push(system);
   return system;
 }
