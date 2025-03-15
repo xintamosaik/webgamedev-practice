@@ -18,16 +18,11 @@ const dungeon = [
 	"#......................................#",
 	"#......................................#",
 	"#......................................#",
-	"#......................................#",
-	"#......................................#",
-	"#......................................#",
-	"#......................................#",
-	"#......................................#",
 	"########################################",
 ]
 const TILE_WIDTH = 8;
 const WIDTH = 40
-const HEIGHT = 25
+const HEIGHT = 20
 
 const COLOR = {
 	black: { r: 0, g: 0, b: 0 },
@@ -39,7 +34,9 @@ const COLOR = {
 const game = window.game
 game.width = TILE_WIDTH * WIDTH
 game.height = TILE_WIDTH * HEIGHT
-
+game.style.imageRendering =  "pixelated"; 
+// game.style.imageRendering =  "crisp-edges"; // Later we might use it to detect browsers that are not ok with "pixelated"
+document.body.style.margin = "unset"
 const ctx = game.getContext("2d");
 
 function Block(r, g, b, a) {
@@ -82,4 +79,35 @@ for (let i = 0; i < dungeon_height; i++) {
 
 	}
 }
+function render() {
+    ctx.fillStyle = "white"
+    ctx.fillRect(8, 8, 8, 8)
+}
 
+function tick() {
+    console.log("tick")
+}
+const MS_PER_TICK = 50 ;
+let lastTime = performance.now();
+let accumulator = 0;
+
+function gameLoop() {
+  const currentTime = performance.now();
+  const deltaTime = currentTime - lastTime;
+  lastTime = currentTime;
+  
+  accumulator += deltaTime;
+  
+  // Process as many ticks as needed to catch up
+  while (accumulator >= MS_PER_TICK) {
+    tick();
+    accumulator -= MS_PER_TICK;
+  }
+  
+  // Render at screen refresh rate via RAF
+  render();
+  
+  requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);
